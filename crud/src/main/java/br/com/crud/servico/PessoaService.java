@@ -13,6 +13,17 @@ public class PessoaService {
     
     private final AtomicLong idEncremente = new AtomicLong();
 
+    public Pessoa criarPessoa(Pessoa pessoa){
+        return pessoa;
+    }
+
+    public Pessoa atualizarPessoa(Pessoa pessoa){
+        return pessoa;
+    }
+
+    public void deletarPessoa(String id) { 
+    }
+
     public Pessoa buscarPorId(String id) {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(idEncremente.incrementAndGet());
