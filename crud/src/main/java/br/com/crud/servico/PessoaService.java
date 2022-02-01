@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.crud.model.Pessoa;
+import br.com.crud.repositorys.PessoaRepository;
 
 @Service
 public class PessoaService {
-    
-    private final AtomicLong idEncremente = new AtomicLong();
+
+    @Autowired
+    private PessoaRepository repository;
 
     public Pessoa criarPessoa(Pessoa pessoa){
         return pessoa;
@@ -26,11 +29,6 @@ public class PessoaService {
 
     public Pessoa buscarPorId(String id) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(idEncremente.incrementAndGet());
-        pessoa.setNome("Leonardo Costa");
-        pessoa.setEmail("leo@gmail.com");
-        pessoa.setEnderoco("Rua major celestino 1085");
-        pessoa.setSexo("masculino");
         return pessoa;
     }
 
@@ -45,7 +43,6 @@ public class PessoaService {
 
     private Pessoa mockPessoa(int i) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(idEncremente.incrementAndGet());
         pessoa.setNome("Leonardo Costa"+ i);
         pessoa.setEmail("leo@gmail.com"+ i);
         pessoa.setEnderoco("Rua major celestino 1085"+ i);
