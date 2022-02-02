@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.crud.exceptions.OperacaoPessoaNaoSuportada;
 import br.com.crud.model.Pessoa;
 import br.com.crud.repositorys.PessoaRepository;
 
@@ -17,36 +18,31 @@ public class PessoaService {
     private PessoaRepository repository;
 
     public Pessoa criarPessoa(Pessoa pessoa){
-        return pessoa;
+        return repository.save(pessoa);
     }
 
     public Pessoa atualizarPessoa(Pessoa pessoa){
-        return pessoa;
+        Pessoa entitade = repository.findById(pessoa.getId())
+                .orElseThrow(()-> new OperacaoPessoaNaoSuportada("Pessoa não encontrada!"));
+                entitade.setNome(pessoa.getNome());
+                entitade.setEmail(pessoa.getEmail());
+                entitade.setEnderoco(pessoa.getEnderoco());
+                entitade.setSexo(pessoa.getSexo());
+                return repository.save(entitade); 
     }
 
-    public void deletarPessoa(String id) { 
+    public void deletarPessoa(Long id) {
+        Pessoa pessoa = repository.findById(id)
+         .orElseThrow(()-> new OperacaoPessoaNaoSuportada("Pessoa não encontrada!"));
+         repository.delete(pessoa);
     }
 
-    public Pessoa buscarPorId(String id) {
-        Pessoa pessoa = new Pessoa();
-        return pessoa;
+    public Pessoa buscarPorId(Long id) {
+        return repository.findById(id).orElseThrow(() -> new OperacaoPessoaNaoSuportada("Pessoa não encontrada!"));
     }
 
     public List<Pessoa> buscarTodos(){
-       List<Pessoa> pessoas = new ArrayList<>();
-       for(int i = 0; i < 8; i++){
-            Pessoa pessoa = mockPessoa(i);
-            pessoas.add(pessoa);
-       } 
-       return pessoas;
+      return repository.findAll();
     }
 
-    private Pessoa mockPessoa(int i) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Leonardo Costa"+ i);
-        pessoa.setEmail("leo@gmail.com"+ i);
-        pessoa.setEnderoco("Rua major celestino 1085"+ i);
-        pessoa.setSexo("masculino");
-        return pessoa;
-    }
 }

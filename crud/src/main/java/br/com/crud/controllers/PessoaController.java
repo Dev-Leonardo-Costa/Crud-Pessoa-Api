@@ -30,7 +30,7 @@ public class PessoaController {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Pessoa buscarPorId(@PathVariable("id") String id ){
-        return services.buscarPorId(id);
+        return null;
     }
     
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -48,7 +48,7 @@ public class PessoaController {
    
    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
    public void deleta(@PathVariable("id") String id ){
-        services.deletarPessoa(id);
+      
    }
     
     
