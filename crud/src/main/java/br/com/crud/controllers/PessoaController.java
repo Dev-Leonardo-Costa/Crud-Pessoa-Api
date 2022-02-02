@@ -29,8 +29,8 @@ public class PessoaController {
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pessoa buscarPorId(@PathVariable("id") String id ){
-        return null;
+    public Pessoa buscarPorId(@PathVariable("id") Long id ){
+        return services.buscarPorId(id);
     }
     
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -47,8 +47,8 @@ public class PessoaController {
    }
    
    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-   public void deleta(@PathVariable("id") String id ){
-      
+   public void deleta(@PathVariable("id") Long id){
+      services.deletarPessoa(id);
    }
     
     

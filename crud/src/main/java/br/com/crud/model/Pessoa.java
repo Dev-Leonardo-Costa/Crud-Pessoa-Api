@@ -22,7 +22,7 @@ public class Pessoa implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
     @Column(name = "NOME", length = 50, nullable = false )
     private String nome;
     @Column(name = "EMAIL", length = 50, nullable = false )
